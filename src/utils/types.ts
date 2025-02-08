@@ -66,3 +66,37 @@ export interface userType {
   iat: number;
   exp: number;
 }
+
+export interface formDataType {
+  type: string;
+  describe: string;
+  income: string;
+  expend: string;
+  cash: string;
+  remark: string;
+  date?: string,
+  id?: string,
+}
+
+export interface formRulesType {
+  describe: {
+    required: boolean;
+    message: string;
+    trigger: string;
+  }[];
+  income: {
+    required: boolean;
+    message: string;
+    trigger: string;
+  }[];
+  expend: {
+    required: boolean;
+    message: string;
+    trigger: string;
+  }[];
+  cash: {
+    required: boolean;
+    message: string;
+    trigger: string;
+  }[];
+}

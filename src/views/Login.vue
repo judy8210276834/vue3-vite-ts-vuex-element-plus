@@ -53,8 +53,8 @@ const router = useRouter();
 const store = useAuthStore();
 
 const loginUser = ref<registerType>({
-  email: "judy123@gmail.com",
-  password: "123456",
+  email: "judy8210276834@gmail.com",
+  password: "aaa12345",
 });
 
 const rules = reactive<registerRilesType>({
@@ -72,6 +72,45 @@ const rules = reactive<registerRilesType>({
   ],
 });
 
+// const handleSubmit = (formEl: FormInstance | undefined) => {
+//   console.log(loginUser.value);
+//   if (!formEl) return;
+//   formEl.validate(async (valid: boolean) => {
+//     if (valid) {
+//       // console.log("submit!");
+//       const {
+//         data: { success, token },
+//       } = await axios.post("/api/users/login", loginUser.value);
+//       // console.log(data);
+
+//       if (success && token) {
+//         localStorage.setItem("token", token);
+
+//         // 解析token
+//         const decode: userType = jwtDecode(token);
+//         console.log(decode);
+
+//         store.setAuth(!!decode);
+//         store.setUser(decode);
+
+//         // 已經自動導入了， 所以使用 @ts-ignore 讓他不去檢測，跳紅色錯誤訊息
+//         // @ts-ignore
+//         ElMessage({
+//           message: "用戶登入成功",
+//           type: "success",
+//           plain: true,
+//         });
+
+//         router.push("/");
+//       }
+//     } else {
+//       console.log("error submit!");
+//     }
+//   });
+// };
+
+
+// 串自己的註冊登入
 const handleSubmit = (formEl: FormInstance | undefined) => {
   console.log(loginUser.value);
   if (!formEl) return;
@@ -79,15 +118,16 @@ const handleSubmit = (formEl: FormInstance | undefined) => {
     if (valid) {
       // console.log("submit!");
       const {
-        data: { success, token },
-      } = await axios.post("/api/users/login", loginUser.value);
+        data: { result },
+        headers: { token },
+      } = await axios.post("/api/login", loginUser.value);
       // console.log(data);
 
-      if (success && token) {
+      if (result.status === "登入成功。" && token) {
         localStorage.setItem("token", token);
 
         // 解析token
-        const decode:userType = jwtDecode(token);
+        const decode: userType = jwtDecode(token);
         console.log(decode);
 
         store.setAuth(!!decode);

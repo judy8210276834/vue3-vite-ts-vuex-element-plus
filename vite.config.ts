@@ -18,7 +18,13 @@ export default defineConfig({
 
   server: {
     proxy: {
-      "/api": "https://www.thenewstep.cn/backend/8007",
+      // "/api": "https://www.thenewstep.cn/backend/8007",
+      // "/api": "http://localhost:5001"
+      "/api": {
+        target: "http://localhost:8000",
+        changeOrigin: true,
+        rewrite: (path) => path.replace(/^\/api/, ""),
+      },
     },
   },
 });
